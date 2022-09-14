@@ -73,5 +73,18 @@ namespace NetologyTasks.Test
             Assert.AreEqual(expected, actual);
 
         }
+
+        [TestMethod]
+        public void CycleFor_2_4816return()
+        {
+            double basis = 2;
+            Tuple<double, double, double> expected = new Tuple<double, double, double>(4, 8, 16);
+
+            CycleTask triplePower = new CycleTask();
+            Tuple<double, double, double> actual = triplePower.CycleFor(basis);
+
+            Assert.AreEqual(expected, actual);
+
+        }
     }
 }
