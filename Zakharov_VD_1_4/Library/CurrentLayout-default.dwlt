@@ -335,19 +335,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/prefab
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/prefab
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Ev1lj\Desktop\UnityGit\NetologyTasks\Zakharov_VD_1_4
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 00340000
-    m_LastClickedID: 13312
+    m_SelectedIDs: 04340000
+    m_LastClickedID: 13316
     m_ExpandedIDs: 00000000f833000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -499,9 +499,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 6afbffff523300006233000080330000ac330000
+      m_SelectedIDs: ac330000
+      m_LastClickedID: 13228
+      m_ExpandedIDs: 6afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

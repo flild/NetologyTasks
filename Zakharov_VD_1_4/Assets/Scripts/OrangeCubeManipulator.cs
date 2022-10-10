@@ -6,6 +6,9 @@ public class OrangeCubeManipulator : MonoBehaviour
 {
     private static float sideSize = 3;
     [SerializeField] private GameObject _cube;
+    [SerializeField] private float _waitTime;
+    [SerializeField] private float _speed;
+
 
     private Vector3[] _starWay =
     {
@@ -40,10 +43,8 @@ public class OrangeCubeManipulator : MonoBehaviour
         while (true)
         {
 
-            yield return CubeMover.MoveOnWay(_starWay);
-            yield return new WaitForSeconds(1f);
-            yield return CubeMover.MoveOnWay(_hexagonWay);
-            yield return new WaitForSeconds(1f);
+            yield return CubeMover.MoveOnWay(_starWay, _waitTime, _speed);
+            yield return CubeMover.MoveOnWay(_hexagonWay, _waitTime, _speed);
         }
 
     }

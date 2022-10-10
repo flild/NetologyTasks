@@ -151,6 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cube: {fileID: 253390006}
+  _waitTime: 1
+  _speed: 2
 --- !u!4 &57567065
 Transform:
   m_ObjectHideFlags: 0
@@ -882,7 +884,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 842c0e58dcf2eaf49a4fb08a1c8775a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1158,6 +1160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cube: {fileID: 1190179085}
+  _waitTime: 1
+  _speed: 2
 --- !u!1 &2112344042
 GameObject:
   m_ObjectHideFlags: 0
