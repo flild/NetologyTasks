@@ -4,60 +4,45 @@ using UnityEngine;
 
 public class OrangeCubeManipulator : MonoBehaviour
 {
-    [SerializeField] private float sideSize;
+    private static float sideSize = 3;
     [SerializeField] private GameObject _cube;
+
+    private Vector3[] _starWay =
+    {
+        new Vector3(sideSize / 2, 0, sideSize),
+        new Vector3(sideSize / 2, 0, -sideSize),
+        new Vector3(-sideSize, 0, sideSize / 2),
+        new Vector3(sideSize, 0, 0),
+        new Vector3(-sideSize, 0, -sideSize / 2)
+    };
+
+    private Vector3[] _hexagonWay =
+{
+        new Vector3(-sideSize, 0, 0),
+        new Vector3(-sideSize / 3, 0, sideSize / 2),
+        new Vector3(sideSize / 3, 0, sideSize / 2),
+        new Vector3(sideSize, 0, 0),
+        new Vector3(sideSize / 3, 0, -sideSize / 2),
+        new Vector3(-sideSize / 3, 0, -sideSize / 2)
+    };
+
 
     private void Start()
     {
-        StartCoroutine(MoveOncurrentWay());
-    }
-    private IEnumerator MoveTo(Vector3 сhangePosition, float time)
-    {
-        Vector3 startPosition = _cube.transform.position;
-        Vector3 endPosition = _cube.transform.position + сhangePosition;
+        ObjectManipulate CubeMover = new ObjectManipulate(_cube);
+        StartCoroutine(MoveOncurrentWay(CubeMover));
 
-        float currentTime = 0f;
-        while (currentTime < time)
-        {
-            _cube.transform.position = Vector3.Lerp(startPosition, endPosition, 1 - (time - currentTime) / time);
-            currentTime += Time.deltaTime;
-
-            yield return null;
-        }
-        _cube.transform.position = endPosition;
     }
 
-    private IEnumerator MoveStarWay()
-    {
-        float delay = 1f;
-        yield return MoveTo(new Vector3(sideSize / 2, 0, sideSize), delay);
-        yield return MoveTo(new Vector3(sideSize / 2, 0, -sideSize), delay);
-        yield return MoveTo(new Vector3(-sideSize, 0, sideSize / 2), delay);
-        yield return MoveTo(new Vector3(sideSize, 0, 0), delay);
-        yield return MoveTo(new Vector3(-sideSize, 0, -sideSize / 2), delay);
-        yield return null;
-    }
 
-    private IEnumerator MoveHexagonWay()
-    {
-        float delay = 1f;
-        yield return MoveTo(new Vector3(-sideSize, 0, 0), delay);
-        yield return MoveTo(new Vector3(-sideSize / 3, 0, sideSize / 2), delay);
-        yield return MoveTo(new Vector3(sideSize / 3, 0, sideSize / 2), delay);
-        yield return MoveTo(new Vector3(sideSize, 0, 0), delay);
-        yield return MoveTo(new Vector3(sideSize / 3, 0, -sideSize / 2), delay);
-        yield return MoveTo(new Vector3(-sideSize / 3, 0, -sideSize / 2), delay);
-        yield return null;
-    }
-
-    private IEnumerator MoveOncurrentWay()
+    private IEnumerator MoveOncurrentWay(ObjectManipulate CubeMover)
     {
         while (true)
         {
 
-            yield return MoveStarWay();
+            yield return CubeMover.MoveOnWay(_starWay);
             yield return new WaitForSeconds(1f);
-            yield return MoveHexagonWay();
+            yield return CubeMover.MoveOnWay(_hexagonWay);
             yield return new WaitForSeconds(1f);
         }
 

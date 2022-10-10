@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a420902708e48b44e96f80b2e32979a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideSize: 3
   _cube: {fileID: 253390006}
 --- !u!4 &57567065
 Transform:
@@ -461,7 +460,7 @@ PrefabInstance:
     - target: {fileID: 8186632560418141847, guid: 17686658a4aaaf64db261a5af58515da,
         type: 3}
       propertyPath: m_Time
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8186632560418141847, guid: 17686658a4aaaf64db261a5af58515da,
         type: 3}
@@ -472,6 +471,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
       value: 0.5345978
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186632560418141847, guid: 17686658a4aaaf64db261a5af58515da,
+        type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9096430700251211627, guid: 17686658a4aaaf64db261a5af58515da,
         type: 3}
@@ -1150,10 +1154,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2005300587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8738be2e431f2404fa56da1d2331ddde, type: 3}
+  m_Script: {fileID: 11500000, guid: f87b0c31f6aa0f54eb93a5d4476c24d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideSize: 2
   _cube: {fileID: 1190179085}
 --- !u!1 &2112344042
 GameObject:
