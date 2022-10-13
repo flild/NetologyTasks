@@ -25,7 +25,7 @@ public class Shoot : MonoBehaviour
     private void OnShoot(CallbackContext context)
     {
         Vector3 bulletSpawn = transform.position + new Vector3(0, 0, 1);
-        _currentBullet = Instantiate(_bullet, bulletSpawn, Quaternion.Euler(0, 0, 90));
+        _currentBullet = Instantiate(_bullet, bulletSpawn, transform.rotation);
     }
 
     private void OnDisable()

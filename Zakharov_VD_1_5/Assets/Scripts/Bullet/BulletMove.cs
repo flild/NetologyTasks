@@ -15,7 +15,7 @@ public class BulletMove : MonoBehaviour
     {
         while (_timeToDeath > 0)
         {
-            transform.position += new Vector3(0, 0, 1) * Time.deltaTime * _moveSpeed;
+            transform.position += transform.forward * Time.deltaTime * _moveSpeed;
             _timeToDeath-= Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
