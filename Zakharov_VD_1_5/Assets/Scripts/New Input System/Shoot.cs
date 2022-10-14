@@ -10,7 +10,6 @@ public class Shoot : MonoBehaviour
     [SerializeField] private GameObject _bullet;
 
     private PlayerConrols _input;
-    private GameObject _currentBullet;
     private void Awake()
     {
         _input = new PlayerConrols();
@@ -25,7 +24,7 @@ public class Shoot : MonoBehaviour
     private void OnShoot(CallbackContext context)
     {
         Vector3 bulletSpawn = transform.position + new Vector3(0, 0, 1);
-        _currentBullet = Instantiate(_bullet, bulletSpawn, transform.rotation);
+        Instantiate(_bullet, bulletSpawn, transform.localRotation);
     }
 
     private void OnDisable()
