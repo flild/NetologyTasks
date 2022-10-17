@@ -8,12 +8,15 @@ public class OldMOver : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private GameObject _bullet;
     [SerializeField] private float _jumpForce;
+
+    private bool _isOnGround;
     private float _shootTime = 0f;
     private Rigidbody _rigidbody;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _isOnGround = true; 
     }
     private void Update()
     {
@@ -21,8 +24,11 @@ public class OldMOver : MonoBehaviour
         Shoot();
         EventCheck();
         Rotation();
-        Jump();
+    }
 
+    private void FixedUpdate()
+    {
+        Jump();
     }
 
     private void MovePlayer()
@@ -67,12 +73,16 @@ public class OldMOver : MonoBehaviour
 
         transform.eulerAngles += new Vector3(0, degree, 0) * _speed * Time.deltaTime;
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        _isOnGround = true;
+    }
     private void Jump()
     {
-        if (Input.GetAxis("Jump") == 1)
+        if (Input.GetKeyDown(KeyCode.Space) && _isOnGround)
         {
-            _rigidbody.AddForce(Vector3.up * _jumpForce);
+            _isOnGround = false;
+            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Force);
         }
     }
 

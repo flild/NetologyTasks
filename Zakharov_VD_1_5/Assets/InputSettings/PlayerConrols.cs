@@ -62,6 +62,15 @@ public partial class @PlayerConrols : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f991f6e-2ac8-427b-9db3-19410221c00e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -240,6 +249,17 @@ public partial class @PlayerConrols : IInputActionCollection2, IDisposable
                     ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35bf242c-cf66-4151-bc01-4ff5b152028e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -252,6 +272,7 @@ public partial class @PlayerConrols : IInputActionCollection2, IDisposable
         m_PlayerKeyboardMap_Event = m_PlayerKeyboardMap.FindAction("Event", throwIfNotFound: true);
         m_PlayerKeyboardMap_Shoot = m_PlayerKeyboardMap.FindAction("Shoot", throwIfNotFound: true);
         m_PlayerKeyboardMap_Rotation = m_PlayerKeyboardMap.FindAction("Rotation", throwIfNotFound: true);
+        m_PlayerKeyboardMap_Jump = m_PlayerKeyboardMap.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +336,7 @@ public partial class @PlayerConrols : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerKeyboardMap_Event;
     private readonly InputAction m_PlayerKeyboardMap_Shoot;
     private readonly InputAction m_PlayerKeyboardMap_Rotation;
+    private readonly InputAction m_PlayerKeyboardMap_Jump;
     public struct PlayerKeyboardMapActions
     {
         private @PlayerConrols m_Wrapper;
@@ -323,6 +345,7 @@ public partial class @PlayerConrols : IInputActionCollection2, IDisposable
         public InputAction @Event => m_Wrapper.m_PlayerKeyboardMap_Event;
         public InputAction @Shoot => m_Wrapper.m_PlayerKeyboardMap_Shoot;
         public InputAction @Rotation => m_Wrapper.m_PlayerKeyboardMap_Rotation;
+        public InputAction @Jump => m_Wrapper.m_PlayerKeyboardMap_Jump;
         public InputActionMap Get() { return m_Wrapper.m_PlayerKeyboardMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -344,6 +367,9 @@ public partial class @PlayerConrols : IInputActionCollection2, IDisposable
                 @Rotation.started -= m_Wrapper.m_PlayerKeyboardMapActionsCallbackInterface.OnRotation;
                 @Rotation.performed -= m_Wrapper.m_PlayerKeyboardMapActionsCallbackInterface.OnRotation;
                 @Rotation.canceled -= m_Wrapper.m_PlayerKeyboardMapActionsCallbackInterface.OnRotation;
+                @Jump.started -= m_Wrapper.m_PlayerKeyboardMapActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerKeyboardMapActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerKeyboardMapActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_PlayerKeyboardMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -360,6 +386,9 @@ public partial class @PlayerConrols : IInputActionCollection2, IDisposable
                 @Rotation.started += instance.OnRotation;
                 @Rotation.performed += instance.OnRotation;
                 @Rotation.canceled += instance.OnRotation;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -370,5 +399,6 @@ public partial class @PlayerConrols : IInputActionCollection2, IDisposable
         void OnEvent(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
