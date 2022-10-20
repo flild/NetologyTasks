@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - WheelTrigger
+  - LevelTrigger
   layers:
   - Default
   - TransparentFX

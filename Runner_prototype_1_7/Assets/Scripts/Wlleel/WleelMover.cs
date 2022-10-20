@@ -17,7 +17,7 @@ public class WleelMover : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _rb.velocity += Vector3.right * _moveSpeed * _direction * Time.fixedDeltaTime;
+        _rb.velocity += Vector3.forward * _moveSpeed * _direction * Time.fixedDeltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
