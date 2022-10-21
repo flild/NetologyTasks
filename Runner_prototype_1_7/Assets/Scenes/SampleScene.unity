@@ -252,7 +252,9 @@ MonoBehaviour:
   - {fileID: 4303176526390648722, guid: 34ed5b18e5b2a144bbb35009841f7cd2, type: 3}
   - {fileID: 4303176526390648722, guid: c1d839981bc148e48a4b4811daec088e, type: 3}
   - {fileID: 4303176526390648722, guid: 51e779eaca3c3f243a950c420d073a94, type: 3}
+  - {fileID: 4303176526390648722, guid: 1141189999835344a85c216e35c49ee6, type: 3}
   _startPlatform: {fileID: 4303176526390648722, guid: 1e35ca791561b814bbcc3110233d65fe, type: 3}
+  _player: {fileID: 3585843774225722371, guid: 4389d4ee26def36459ee9d4a401818c1, type: 3}
 --- !u!4 &1300053424
 Transform:
   m_ObjectHideFlags: 0

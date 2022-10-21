@@ -6,16 +6,21 @@ using UnityEngine;
 public class ForwardMove : MonoBehaviour
 {
     private Rigidbody _rb;
-    [SerializeField] private float _playerSpeed = 5f;
+    [SerializeField] private float _playerSpeed;
 
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        StartCoroutine(MoveForward());
     }
-    private void FixedUpdate()
+    private IEnumerator MoveForward()
     {
-        _rb.velocity += Vector3.forward * _playerSpeed * Time.fixedDeltaTime;
+        while (true)
+        {
+            _rb.velocity += Vector3.forward * _playerSpeed*Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
     }
 
 }

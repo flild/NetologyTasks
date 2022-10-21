@@ -5,16 +5,19 @@ using Random = UnityEngine.Random;
 
 public class PlatformManager : MonoBehaviour
 {
-    [SerializeField] protected GameObject[] _prefabPlatforms;
+    [SerializeField] private GameObject[] _prefabPlatforms;
     [SerializeField] private GameObject _startPlatform;
-    protected Vector3 _spawnPoint = new Vector3(0, 0, 0);
+    [SerializeField] private GameObject _player;
 
-    //я не знаю как это сделать правильно....
-    protected GameObject[] _ActivePlatforms = new GameObject[5];
+    private int _current_index = 0;
+    private Vector3 _spawnPoint = new Vector3(0, 0, 0);
+
+    private GameObject[] _ActivePlatforms = new GameObject[5];
 
     private void Start()
     {
         _ActivePlatforms[0] = SpawnPlatform(_startPlatform);
+        Instantiate(_player,new Vector3(0, 1.38f, -3.56999993f), Quaternion.Euler(0, 0, 0)); 
         for (int index = 1;index < _ActivePlatforms.Length;index++)
         {
             _ActivePlatforms[index] = SpawnPlatform(_prefabPlatforms[Random.Range(0, _prefabPlatforms.Length)]);
@@ -23,11 +26,19 @@ public class PlatformManager : MonoBehaviour
 
         
     }
-    protected GameObject SpawnPlatform(GameObject platform)
+    private GameObject SpawnPlatform(GameObject platform)
     {
         GameObject createdPlatform =  Instantiate(platform, _spawnPoint, Quaternion.Euler(0, 0, 0));
         _spawnPoint.z += 10;
         Debug.Log("Spawn");
         return createdPlatform;
+    }
+
+    public void SpawnNextPlatform()
+    {
+        Destroy(_ActivePlatforms[_current_index]);
+        _ActivePlatforms[_current_index] = SpawnPlatform(_prefabPlatforms[Random.Range(0, _prefabPlatforms.Length)]);
+        _current_index++;
+        if (_current_index >= _ActivePlatforms.Length) _current_index = 0;
     }
 }

@@ -1,0 +1,76 @@
+{
+    "name": "PlayerController",
+    "maps": [
+        {
+            "name": "PlayerControlMap",
+            "id": "2d516c49-c3d2-478a-b0f9-020ff7597e6a",
+            "actions": [
+                {
+                    "name": "SideMove",
+                    "type": "Value",
+                    "id": "a0020dba-a030-4a67-8604-b5ef7b4ccc36",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "1f0e0b9b-74d9-47ca-a0d8-2ba7e0ca3e97",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "fbea7d9f-8d67-47c1-b43c-44f076827751",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SideMove",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "1ebec0ae-1a8c-4ad8-90a8-b12227190c12",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SideMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "885b3df8-d6ba-487c-8e87-61f182671517",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SideMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0db5dfb9-e2c4-4ea1-a130-fca8080151ce",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

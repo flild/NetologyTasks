@@ -1,21 +1,27 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
-public class PlatformSwitcher : PlatformManager
+public class PlatformSwitcher : MonoBehaviour
 {
-    private int _current_index = 0;
+    private GameObject _gameManager;
+    private PlatformManager _manager;
+
+    private void Start()
+    {
+        _gameManager = GameObject.Find("GameManager");
+        _manager = _gameManager.GetComponent<PlatformManager>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         
         if (other.tag == "LevelTrigger")
         {
-            Destroy(_ActivePlatforms[_current_index]);
-            _ActivePlatforms[_current_index] = SpawnPlatform(_prefabPlatforms[Random.Range(0, _prefabPlatforms.Length)]);
-            _current_index++;
-            if (_current_index >= _ActivePlatforms.Length) _current_index = 0;
+            _manager.SpawnNextPlatform();
         }
     }
 }
