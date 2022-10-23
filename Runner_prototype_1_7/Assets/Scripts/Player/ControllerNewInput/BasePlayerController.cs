@@ -23,7 +23,6 @@ public class BasePlayerController : MonoBehaviour
 
     protected void Jump()
     {
-        Debug.Log(_isOnGround);
         if (_isOnGround)
         {
             _isOnGround = false;

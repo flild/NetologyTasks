@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 10c8e65543d17514f9e8fc019d4312f2, type: 3}
       propertyPath: m_Name
-      value: Cactus
+      value: Cactus Variant
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 10c8e65543d17514f9e8fc019d4312f2, type: 3}
       propertyPath: m_RootOrder
@@ -91,3 +91,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5604299, y: 6.793808, z: 4.308997}
   m_Center: {x: -0.24631399, y: 3.3911881, z: -0.39477146}
+--- !u!114 &240760538605851262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811923298863860989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef9b7511fbd478499ce4cc476cd8352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class ForwardMove : MonoBehaviour
 {
     private Rigidbody _rb;
+    private Vector3 _normal;
     [SerializeField] private float _playerSpeed;
 
 
@@ -18,9 +19,20 @@ public class ForwardMove : MonoBehaviour
     {
         while (true)
         {
-            _rb.velocity += Vector3.forward * _playerSpeed*Time.fixedDeltaTime;
+            Vector3 normal_vector = Vector3.forward - Vector3.Dot(Vector3.forward, _normal) * _normal;
+            _rb.velocity += normal_vector * _playerSpeed*Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        _normal = collision.contacts[0].normal;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        _normal = Vector3.zero;
     }
 
 }

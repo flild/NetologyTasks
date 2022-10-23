@@ -17,7 +17,7 @@ public class PlatformManager : MonoBehaviour
     private void Start()
     {
         _ActivePlatforms[0] = SpawnPlatform(_startPlatform);
-        Instantiate(_player,new Vector3(0, 1.38f, -3.56999993f), Quaternion.Euler(0, 0, 0)); 
+        Instantiate(_player,new Vector3(0, 1.38f, -3.56999993f), Quaternion.Euler(0, 0, 0),transform); 
         for (int index = 1;index < _ActivePlatforms.Length;index++)
         {
             _ActivePlatforms[index] = SpawnPlatform(_prefabPlatforms[Random.Range(0, _prefabPlatforms.Length)]);
@@ -30,7 +30,6 @@ public class PlatformManager : MonoBehaviour
     {
         GameObject createdPlatform =  Instantiate(platform, _spawnPoint, Quaternion.Euler(0, 0, 0));
         _spawnPoint.z += 10;
-        Debug.Log("Spawn");
         return createdPlatform;
     }
 
