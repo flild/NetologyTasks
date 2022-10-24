@@ -7,7 +7,7 @@ public class ForwardMove : MonoBehaviour
 {
     private Rigidbody _rb;
     private Vector3 _normal;
-    [SerializeField] private float _playerSpeed;
+    public float _playerSpeed;
 
 
     private void Start()

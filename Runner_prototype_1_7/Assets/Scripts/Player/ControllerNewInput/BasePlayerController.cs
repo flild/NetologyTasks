@@ -7,8 +7,8 @@ public class BasePlayerController : MonoBehaviour
 {
     private Rigidbody _rb;
 
-    [SerializeField] protected float _sideMoveSpeed = 5;
-    [SerializeField] private float _jumpForce = 5;
+    [SerializeField] private float _sideMoveSpeed ;
+    [SerializeField] private float _jumpForce;
 
     private bool _isOnGround = true;
 

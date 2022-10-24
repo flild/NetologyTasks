@@ -11,12 +11,16 @@ public class PlatformSwitcher : MonoBehaviour
     private GameObject _gameManager;
     private PlatformManager _manager;
     private ScoreCounter _score;
+    private ForwardMove _PlayerSpeed;
 
     private void Start()
     {
         _gameManager = transform.parent.gameObject;
         _manager = _gameManager.GetComponent<PlatformManager>();
         _score = _gameManager.GetComponentInChildren<ScoreCounter>();
+        _PlayerSpeed = gameObject.GetComponentInChildren<ForwardMove>();
+
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +28,10 @@ public class PlatformSwitcher : MonoBehaviour
         {
             _manager.SpawnNextPlatform();
             _score.AddScore();
+            if(_score._score == 10)
+                {
+                _PlayerSpeed._playerSpeed *= 2;
+                }
         }
 
     }

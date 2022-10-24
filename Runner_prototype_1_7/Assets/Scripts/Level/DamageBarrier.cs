@@ -12,4 +12,11 @@ public class DamageBarrier : MonoBehaviour
             health.Hit(0.5f);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out PlayerHealth health))
+        {
+            health.Hit(0.5f);
+        }
+    }
 }

@@ -5,7 +5,7 @@ using TMPro;
 
 public class ScoreCounter : MonoBehaviour
 {
-    private int _score;
+    public int _score { get; set; }
     [SerializeField] private TextMeshProUGUI _text;
 
     private void Start()
