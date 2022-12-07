@@ -8,13 +8,15 @@ public class PlayerControl : MonoBehaviour
 {
     private PlayerController _input;
     private Rigidbody _rb;
-    private float _cameraRotationX;
-    private float _cameraRotationY;
+    private bool _isOnGround = true;
+
+    public delegate void MethodContainer();
+    public event MethodContainer onShootEvent;
+
 
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private float HorizontalSensitivity = 30.0f;
-    [SerializeField] private float VerticalSensitivity = 30.0f;
+
 
 
     private void Awake()
@@ -43,25 +45,30 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        //поворот камеры за мышкой
-        _cameraRotationX = _input.PlayerMap.ViewX.ReadValue<float>()* HorizontalSensitivity;
-        _cameraRotationY = _input.PlayerMap.ViewY.ReadValue<float>()* -VerticalSensitivity;
-        transform.localEulerAngles += new Vector3(_cameraRotationY, _cameraRotationX, 0) * Time.deltaTime;
+        
+
     }
     private void Move(Vector2 Value)
     {
-        Vector3 mover =  new Vector3(Value.x, 0 , Value.y);
-        _rb.velocity = mover * _speed * Time.fixedDeltaTime;
+        Vector3 mover = Value.y * transform.forward + Value.x * transform.right;
+        _rb.AddForce( mover.normalized * _speed, ForceMode.Force);
     }
 
-    private void OnShoot(CallbackContext cotext)
+    private void OnShoot(CallbackContext context)
     {
-
+            onShootEvent();
     }
 
-    private void OnJump(CallbackContext cotext)
+    private void OnJump(CallbackContext context)
     {
-        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Force);
+        if (_isOnGround)
+        {
+            _rb.AddForce(transform.up * _jumpForce, ForceMode.Force);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        _isOnGround = true;
     }
 
     private void OnDisable()

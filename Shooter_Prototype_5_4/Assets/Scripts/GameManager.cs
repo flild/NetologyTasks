@@ -5,61 +5,113 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    private Dictionary<GameObject,EnemyData> _enemies = new Dictionary<GameObject, EnemyData>();
-    private Dictionary<GameObject, ProjectileData> _projectiles = new Dictionary<GameObject, ProjectileData>();
+    private List<GameObject> _enemies = new();
+    private Dictionary<GameObject,Enemy> _enemiesScript = new();
+    public List <GameObject> _projectiles = new();
     private Vector3 _bulletSpawn;
-    // По хорошему тут нужно сделать файл со всеми типа оружия и снарядов и уже оттуда подтягивать данные,
-    // но у меня другая задача, поэтому хардкодим
-    private Dictionary<ProjecttileType, ProjectileData> ProjectailesSetting = new Dictionary<ProjecttileType, ProjectileData>()
-    {
-        {ProjecttileType.FromPlayer, new ProjectileData(ProjecttileType.FromPlayer, 50, 100, 4)},
-        {ProjecttileType.FromEnemy, new ProjectileData(ProjecttileType.FromEnemy,15, 60, 2) },
-        {ProjecttileType.FromBoss, new ProjectileData(ProjecttileType.FromBoss, 25, 110, 2) }
-    };
-    private Dictionary<EnemyType, EnemyData> EnemySetting = new Dictionary<EnemyType, EnemyData>()
-    {
-        {EnemyType.baseEnemy, new EnemyData(EnemyType.baseEnemy, 75, ProjecttileType.FromEnemy,300, 5,0)},
-        {EnemyType.npc, new EnemyData(EnemyType.npc, 50, ProjecttileType.FromEnemy,0, 0,0)},
-        {EnemyType.boss, new EnemyData(EnemyType.boss, 50, ProjecttileType.FromBoss,600,7,0)},
-    };
+    private PlayerControl _playerControl;
+
 
     [SerializeField] private int _enemyCount;
     [SerializeField] private GameObject _enemyPrefab;
-    [SerializeField] private GameObject _bullet;
-    [SerializeField] private PlayerControl _player; // так делать незя, но мне лень делать заглушку player)
+    [SerializeField] private GameObject _bulletPlayer;
+    [SerializeField] private GameObject _bulletEnemy;
+    [SerializeField] private Player _player;
     [SerializeField] private GameObject[] _spawnPoints;
+    [SerializeField] private float _bulletSpeed;
 
 
 
     private void Start()
     {
-        for(int i = 0; i < _enemyCount; i++)
+        _playerControl = _player.GetComponent<PlayerControl>();
+        for (int i = 0; i < _enemyCount; i++)
         {
             Vector3 randomSpawn = _spawnPoints[Random.Range(0, _spawnPoints.Length)].transform.position;
             GameObject current_enemy = Instantiate(_enemyPrefab, randomSpawn, Quaternion.Euler(0, Random.Range(0, 360), 0));
-            _enemies.Add(current_enemy, EnemySetting[EnemyType.baseEnemy]);
+            _enemies.Add(current_enemy);
         }
+        foreach(GameObject enemy in _enemies )
+        {
+            AttackRadius CollisionWithPlayer = enemy.GetComponentInChildren<AttackRadius>();
+            CollisionWithPlayer.onPlayerCollision += AttackOnPlayer;
+            Enemy currentEnemy = enemy.GetComponentInChildren<Enemy>();
+            currentEnemy.onEnemyDeath += EnemyDeath;
+            _enemiesScript.Add(enemy,enemy.GetComponent<Enemy>());
+        }
+        _playerControl.onShootEvent += OnPlayerShoot;
     }
     private void Update()
     {
+        EnemyCheck();
         
+    }
+    private void FixedUpdate()
+    {
+        ProjectileCheck();
     }
 
     private void EnemyCheck()
     {
         foreach(var enemy in _enemies)
         {
-
+            //if (enemy.health <= 0) EnemyDeath(enemy.Key);
+         
+            
         }
     }
-    public void Shoot(ProjecttileType BulletType, GameObject source, Vector3 target, GameObject ProjectilePrefab)
+    private void ProjectileCheck()
     {
-        // добавляем в словарь снаряд и его характеристики
-        Vector3 _projectileSpawn = source.transform.localPosition;
-        GameObject current_bullet = Instantiate(ProjectilePrefab, _projectileSpawn, source.transform.localRotation);
-        ProjectileData projectileSetting = ProjectailesSetting[BulletType];
-        _projectiles.Add(current_bullet, projectileSetting);
+        foreach(var projectile in _projectiles)
+        {
+            projectile.transform.position += projectile.transform.forward* _bulletSpeed* Time.fixedDeltaTime;
+        }
     }
 
+
+    private void EnemyDeath(GameObject enemy)
+    {
+        enemy.SetActive(false);
+        enemy.transform.position = _spawnPoints[Random.Range(0, _spawnPoints.Length)].transform.position;
+        enemy.SetActive(true);
+        _enemiesScript[enemy].health = 75;
+    }
+
+    private void AttackOnPlayer(Transform enemyTransform, Enemy fromEnemy)
+    {
+        enemyTransform.LookAt(_player.transform);
+        StartCoroutine(ShootToPlayer(enemyTransform.position,enemyTransform.localRotation, fromEnemy));
+    }
+
+    private void OnPlayerShoot()
+    {
+        Shoot(ProjecttileType.FromPlayer, _player.transform, _player.transform.position + Vector3.forward, _bulletPlayer);
+    }
+    private IEnumerator ShootToPlayer(Vector3 enemyPosition,Quaternion bulletRotation, Enemy fromEnemy)
+    {
+        
+        float distanceToPlayer = Vector3.Distance(_player.transform.position, enemyPosition);
+        Debug.Log(distanceToPlayer >= fromEnemy.attackRadius);
+        while (distanceToPlayer >= fromEnemy.attackRadius)
+        {
+            fromEnemy.transform.LookAt(_player.transform.position);
+            distanceToPlayer = Vector3.Distance(_player.transform.position, enemyPosition);
+            Shoot(ProjecttileType.FromEnemy, fromEnemy.transform,_player.transform.position, _bulletEnemy);
+            yield return new WaitForSeconds(fromEnemy.attackSpeed);
+        }
+
+    }
+    public void Shoot(ProjecttileType BulletType, Transform source, Vector3 target, GameObject ProjectilePrefab)
+    {
+        Vector3 _projectileSpawn = source.localPosition;
+        GameObject current_bullet = Instantiate(ProjectilePrefab, _projectileSpawn+source.up + source.forward, source.rotation);
+        _projectiles.Add(current_bullet);
+    }
+
+
+    private void OnDisable()
+    {
+        
+    }
 
 }

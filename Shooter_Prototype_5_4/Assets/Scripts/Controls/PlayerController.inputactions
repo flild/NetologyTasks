@@ -11,7 +11,8 @@
                     "id": "a747bbb9-3fac-45fd-94c1-7e6f066d444e",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Shoot",
@@ -19,7 +20,8 @@
                     "id": "92e2a67d-c97f-4f1a-9179-2256bb0500f1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Jump",
@@ -27,7 +29,8 @@
                     "id": "f39e8dd3-a96a-4208-bc2b-bef92a8dc053",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ViewX",
@@ -35,7 +38,8 @@
                     "id": "bdf6876c-fd17-417a-98aa-082513c8c4d3",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "ViewY",
@@ -43,7 +47,26 @@
                     "id": "a5f64410-e12f-482e-b57a-bbd3bb810331",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ViewXPos",
+                    "type": "Value",
+                    "id": "3242ccf7-1167-471b-b7a4-88c26f25387b",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ViewYPos",
+                    "type": "Value",
+                    "id": "5addf5ca-431e-4679-b3c6-78325a11c8c7",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -143,6 +166,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ViewY",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ceb5a33-4de5-41e4-96ae-0b6eaed94ac3",
+                    "path": "<Mouse>/position/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ViewXPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90489c7b-55ff-4177-8a91-923241013f8c",
+                    "path": "<Mouse>/position/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ViewYPos",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
