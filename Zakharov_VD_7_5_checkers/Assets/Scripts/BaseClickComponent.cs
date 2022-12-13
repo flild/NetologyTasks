@@ -14,8 +14,8 @@ namespace Checkers
 
         public MeshRenderer _meshRenderer;
         [Tooltip("Цветовая сторона игрового объекта"), SerializeField]
-        private ColorType _color;
-        public Material _defaultMaterial;
+        public ColorType color;
+        private Material _defaultMaterial;
 
         private void Awake()
         {
@@ -24,7 +24,7 @@ namespace Checkers
         /// <summary>
         /// Возвращает цветовую сторону игрового объекта
         /// </summary>
-        public ColorType GetColor => _color;
+        public ColorType GetColor => color;
 
         /// <summary>
         /// Возвращает или устанавливает пару игровому объекту

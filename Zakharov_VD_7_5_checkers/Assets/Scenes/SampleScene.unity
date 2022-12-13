@@ -170,6 +170,7 @@ MonoBehaviour:
   _rows: 8
   _columns: 8
   _cellPrefab: {fileID: 1492328918881271777, guid: dbba3c1d8e7931f43ae0880072c05c89, type: 3}
+  _chipPrefab: {fileID: 5405395892959788453, guid: 36d0c4eb6603e2249bd120572860383c, type: 3}
 --- !u!1 &475110672
 GameObject:
   m_ObjectHideFlags: 0
