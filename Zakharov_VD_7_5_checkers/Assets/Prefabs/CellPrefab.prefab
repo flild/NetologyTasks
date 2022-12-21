@@ -114,4 +114,6 @@ MonoBehaviour:
   blackCellMaterial: {fileID: 2100000, guid: 77aeb7ac4797ce64c9aab81cd2f9dc1e, type: 2}
   whiteChipMaterial: {fileID: 2100000, guid: 309177ddfda9e9e409342d4e2caab506, type: 2}
   blackChipMaterial: {fileID: 2100000, guid: 2e182d198f62eb54c9a088f34fd8d193, type: 2}
-  _color: 0
+  currentCell: {fileID: 2100000, guid: 5c0cd93a77d441447b2449275a28d1a7, type: 2}
+  _meshRenderer: {fileID: 0}
+  color: 0

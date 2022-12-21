@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1081252483586919892}
   - component: {fileID: 7914094856698336286}
   - component: {fileID: 7516026915498045912}
-  - component: {fileID: 4435704946775742830}
   - component: {fileID: 5405395892959788453}
   m_Layer: 0
   m_Name: ChipWhite
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583446506670321660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.572, y: 0.35, z: -1.49}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.1, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 309177ddfda9e9e409342d4e2caab506, type: 2}
+  - {fileID: 2100000, guid: f876a64a0f07b614688331343f5accd8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,20 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4435704946775742830
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583446506670321660}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &5405395892959788453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,8 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29ed74760436ba4eafbe685f10f42fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whiteCellMaterial: {fileID: 0}
-  blackCellMaterial: {fileID: 0}
+  whiteCellMaterial: {fileID: 2100000, guid: 0181eadba628f214d8d49c67a8e46066, type: 2}
+  blackCellMaterial: {fileID: 2100000, guid: 77aeb7ac4797ce64c9aab81cd2f9dc1e, type: 2}
   whiteChipMaterial: {fileID: 2100000, guid: 309177ddfda9e9e409342d4e2caab506, type: 2}
   blackChipMaterial: {fileID: 2100000, guid: 2e182d198f62eb54c9a088f34fd8d193, type: 2}
-  _color: 0
+  currentCell: {fileID: 2100000, guid: 5c0cd93a77d441447b2449275a28d1a7, type: 2}
+  color: 0
+  isFreeToMove: 0

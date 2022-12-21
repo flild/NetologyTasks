@@ -11,10 +11,13 @@ namespace Checkers
         [SerializeField] public Material blackCellMaterial;
         [SerializeField] public Material whiteChipMaterial;
         [SerializeField] public Material blackChipMaterial;
+        [SerializeField] public Material currentCell;
+        
 
-        public MeshRenderer _meshRenderer;
+        protected MeshRenderer _meshRenderer;
         [Tooltip("Цветовая сторона игрового объекта"), SerializeField]
         public ColorType color;
+        public bool isFreeToMove = false;
         private Material _defaultMaterial;
 
         private void Awake()
@@ -40,6 +43,7 @@ namespace Checkers
         public void SetMaterial(Material material = null)
         {
             //если переданный материал равен Null, то устанавливаем дефолтный материал
+            //Debug.Log(_meshRenderer.sharedMaterial);
             _meshRenderer.sharedMaterial = material ? material : _defaultMaterial;
         }
         
@@ -47,12 +51,12 @@ namespace Checkers
         /// <summary>
         /// Событие клика на игровом объекте
         /// </summary>
-        public event ClickEventHandler OnClickEventHandler;
+        public event ClickEventHandler Clicked;
 
         /// <summary>
         /// Событие наведения и сброса наведения на объект
         /// </summary>
-        public event FocusEventHandler OnFocusEventHandler;
+        public event FocusEventHandler Focused;
 
 
         //При навадении на объект мышки, вызывается данный метод
@@ -67,14 +71,14 @@ namespace Checkers
         //При нажатии мышкой по объекту, вызывается данный метод
         public void OnPointerClick(PointerEventData eventData)
 		{
-            OnClickEventHandler?.Invoke(this);
+            Clicked?.Invoke(this);
         }
 
         //Этот метод можно вызвать в дочерних классах (если они есть) и тем самым пробросить вызов
         //события из дочернего класса в родительский
         protected void CallBackEvent(CellComponent target, bool isSelect)
         {
-            OnFocusEventHandler?.Invoke(target, isSelect);
+            Focused?.Invoke(target, isSelect);
 		}
 
 
@@ -83,9 +87,21 @@ namespace Checkers
     public enum ColorType
     {
         White,
-        Black
+        Black,
+        noOne
+    }
+    public struct Coordinate
+    {
+        private int _x;
+        private int _y;
+
+        public Coordinate(int x, int y)
+        {
+            _x = x;
+            _y = y;
+        }
     }
 
-    public delegate void ClickEventHandler(BaseClickComponent component);
+        public delegate void ClickEventHandler(BaseClickComponent component);
     public delegate void FocusEventHandler(CellComponent component, bool isSelect);
 }
