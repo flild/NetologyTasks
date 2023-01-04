@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+
 using UnityEngine;
+
 
 namespace Checkers
 {
-    public class ClickHandler : MonoBehaviour
+    public class ClickHandler : MonoBehaviour, IRecorder
     {
 
         [SerializeField] public Material currentWhiteChip;
@@ -17,13 +18,25 @@ namespace Checkers
         private CellComponent previousClickedCell;
         private SideController _sideConroller;
         private WinChecker _winChecker;
+        private IObserve _observer;
+
+        public event Action<String> Step;
+
+        public event Action<ColorType> GameEnded;
+
+        public event Action<ChipComponent> ChipDestroyed;
 
         
+
+
         public void Init(CellComponent[,] cells)
         {
+            TryGetComponent(out _observer);
             _cells = cells;
 
-            foreach(CellComponent cell in _cells)
+            _observer.RepeatStep += OnStepRepeat;
+
+            foreach (CellComponent cell in _cells)
             {
                 cell.Clicked += OnCellClicked;
             }
@@ -47,6 +60,7 @@ namespace Checkers
             {
                 cell.Clicked -= OnCellClicked;
             }
+            _observer.RepeatStep -= OnStepRepeat;
         }
 
         private void OnCellClicked(BaseClickComponent cell)
@@ -54,7 +68,7 @@ namespace Checkers
             if( !cell.isFreeToMove)
                 ClearDeskSelect();
             if (cell == null) return;
-
+            
             if (cell.Pair != null) 
             {
                 if (cell.Pair.color != _sideConroller.GetCurrentSide())
@@ -65,6 +79,9 @@ namespace Checkers
                 }
                 cell.Pair.SetMaterial(cell.Pair.color == ColorType.Black ? currentBlackChip : currentWhiteChip);
                 _pathFinder.HighlightNextell(cell as CellComponent);
+                CellComponent cellToRecord = cell as CellComponent;
+                Step?.Invoke(Extension.ToSerializable(cellToRecord.coordinate.ToString(),
+                    _sideConroller.GetCurrentSide(), RecordType.Click));//observ
                 previousClickedCell = cell as CellComponent;
                 return;
             }
@@ -76,15 +93,28 @@ namespace Checkers
             ClearDeskSelect();
 
         }
+
         private void MoveChip(CellComponent cell)
         {
             StartCoroutine(_chipMover.MoveChip(previousClickedCell, cell, previousClickedCell.Pair as ChipComponent));
+            Step?.Invoke(Extension.ToSerializable(previousClickedCell.coordinate.ToString()
+                ,_sideConroller.GetCurrentSide(),RecordType.Move, cell.coordinate.ToString()));//observ
             var killingChip = _pathFinder.GetChipToKill();
             if (killingChip && (_pathFinder.GetCellToKill() == cell))
+            {
                 killingChip.KillChip();
+                ChipDestroyed?.Invoke(killingChip); //observ
+            }    
+                
             _sideConroller.ChangeSide();
             StartCoroutine(_camera.MoveCamera());
             
+        }
+
+        private void OnStepRepeat(Coordinate cordinate)
+        {
+            var cell = _cells[cordinate._x, cordinate._y];
+            OnCellClicked(cell);
         }
         private void ClearDeskSelect()
         {

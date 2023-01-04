@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+
 using UnityEngine;
 using System.Threading.Tasks;
 
 namespace Checkers
 {
-    public class WinChecker : MonoBehaviour
+    public class WinChecker : MonoBehaviour, IRecorder
     {
         private CellComponent[,] _cells;
         private bool anyBlackChip = true;
@@ -14,6 +14,11 @@ namespace Checkers
         private int _columns;
         private string blackWinMessage = "Черные выйграли!";
         private string whiteWinMessage = "Белые выйграли!";
+
+
+        public event Action<ChipComponent> ChipDestroyed;//zaglushka
+        public event Action<String> Step;//zaglushka
+        public event Action<ColorType> GameEnded;
 
         public void Init(CellComponent[,] cells)
         {
@@ -52,6 +57,7 @@ namespace Checkers
             if (anyWhiteChip && anyBlackChip)
                 return;
             Debug.Log(anyWhiteChip ? blackWinMessage : whiteWinMessage);
+            GameEnded.Invoke(anyWhiteChip ? ColorType.Black : ColorType.White);
         }
 
     }

@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 224018329}
   - component: {fileID: 224018330}
   - component: {fileID: 224018331}
+  - component: {fileID: 224018332}
   m_Layer: 0
   m_Name: Desk
   m_TagString: Untagged
@@ -241,6 +242,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4b9efc7d7386e4f85d188954a769b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &224018332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224018324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a728df2a6055a4645bc32da26cfcd04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isNeedRecord: 0
+  isNeedRepeat: 1
+  _fileName: repeat
+  _delayBetweenRepeat: 1
 --- !u!1 &475110672
 GameObject:
   m_ObjectHideFlags: 0

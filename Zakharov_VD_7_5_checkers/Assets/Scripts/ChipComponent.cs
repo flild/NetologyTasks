@@ -22,7 +22,6 @@ namespace Checkers
         {
             //удаляем эту фишку из пары клетки в которой она стояла
             Pair.Pair = null;
-            Debug.Log(Pair +" "+ Pair.Pair);
             Destroy(gameObject);
         }
     }
