@@ -400,6 +400,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d0da41787401440ae8b4d5694c228d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelManager: {fileID: 1763338433}
+  _health: 3
+  _startSpeed: 5
+  _maxBallSpeed: 10
 --- !u!135 &265156448
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1093,7 +1097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5e136459d621b428e570e26c5aafeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 2
+  _boundPlatform: {fileID: 1352808817}
 --- !u!54 &876371645
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1885,8 +1889,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352808812}
   m_LocalRotation: {x: -0.49561766, y: 0.5043443, z: 0.49561766, w: 0.5043443}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.0000009536743, z: 0}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1662545327}
@@ -2461,6 +2465,7 @@ MonoBehaviour:
   - {fileID: 1434512033}
   - {fileID: 2027301924}
   - {fileID: 1308152965}
+  _ball: {fileID: 265156447}
 --- !u!65 &1763338434
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2556,7 +2561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5e136459d621b428e570e26c5aafeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 1
+  _boundPlatform: {fileID: 573587966}
 --- !u!54 &1778465292
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -7,12 +7,17 @@ using static UnityEngine.InputSystem.InputAction;
 [RequireComponent(typeof(Rigidbody))]
 public class Ball : MonoBehaviour
 {
+    [SerializeField] private LevelSpawn _levelManager;
+    [SerializeField] private float _health;
+    [SerializeField] private float _startSpeed;
+    [SerializeField] private float _maxBallSpeed;
+
     private BallSpawnPoint _freezePoint;
     private Platform _currentPlatform;
-    private bool isFreezeToShoot = true;
+    private bool isFreezeToShoot;
     private PlayersConrol _input;
     private Rigidbody _rb;
-    private float _ballSpeed = 5f;
+    private float _ballSpeed;
     private Vector3 _contactPosition;
     private Vector3 _lastFrameVelocity;
 
@@ -36,6 +41,8 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         var startPlatform = FindObjectOfType<FirstPlayerControl>();
+        isFreezeToShoot = true;
+        _ballSpeed = _startSpeed;
         
         _currentPlatform = startPlatform.GetComponent<Platform>();
         _freezePoint = startPlatform.GetComponentInChildren<BallSpawnPoint>();
@@ -53,7 +60,6 @@ public class Ball : MonoBehaviour
 
     private void OnShootBall(CallbackContext context)
     {
-        //_rb.AddForce(_currentPlatform.transform.forward * _ballSpeed, ForceMode.Force);
         _rb.velocity = _currentPlatform.transform.forward * _ballSpeed;
         isFreezeToShoot = false;
 
@@ -75,10 +81,48 @@ public class Ball : MonoBehaviour
         _normal = collision.contacts[0].normal;
         _reflection = Vector3.Reflect(_lastFrameVelocity.normalized,_normal);
         _contactPosition = collision.contacts[0].point;
-
+        if(collision.gameObject.TryGetComponent<Block>(out Block _block))
+        {
+            _ballSpeed = _ballSpeed >= _maxBallSpeed ? _maxBallSpeed : _ballSpeed + 0.5f;
+        }
         _rb.velocity = _reflection*_ballSpeed;
+
 
     }
 
+    public void FreezeBallToShoot()
+    {
+        isFreezeToShoot = true;
+    }
+    public void DestroyLevelBlock(GameObject block)
+    {
+        _levelManager.ReduceLevelBlocks(block);
+    }
+
+    /// <summary>
+    /// Устанавливает текущую платформу на которой будет спавниться мяч после смерти или смены уровня
+    /// </summary>
+    public void SetCurrentPlatform(Platform _platform)
+    {
+        _currentPlatform = _platform;
+        _freezePoint = _platform.GetComponentInChildren<BallSpawnPoint>();
+    }
+    public void Death()
+    {
+        isFreezeToShoot = true;
+        _ballSpeed = _startSpeed;
+        _health -= 1;
+        if(_health>0)
+        {
+            Debug.Log("Осталось попыток " + _health);
+        }
+        else
+        {
+            Debug.Log("Game Over");
+            _levelManager.ResetGame();
+        }
+        
+        
+    }
 
 }
