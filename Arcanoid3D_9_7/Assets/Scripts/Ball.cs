@@ -12,8 +12,9 @@ public class Ball : MonoBehaviour
     private bool isFreezeToShoot = true;
     private PlayersConrol _input;
     private Rigidbody _rb;
-    private float _ballSpeed = 200f;
-   // private Vector3 
+    private float _ballSpeed = 5f;
+    private Vector3 _contactPosition;
+    private Vector3 _lastFrameVelocity;
 
     private Vector3 _normal;
     private Vector3 _reflection;
@@ -47,12 +48,13 @@ public class Ball : MonoBehaviour
         {
             transform.position = _freezePoint.transform.position;
         }
+        _lastFrameVelocity = _rb.velocity;
     }
 
     private void OnShootBall(CallbackContext context)
     {
-        _rb.AddForce(_currentPlatform.transform.forward * _ballSpeed, ForceMode.Force);
-        //_rb.velocity = _currentPlatform.transform.forward * _ballSpeed;
+        //_rb.AddForce(_currentPlatform.transform.forward * _ballSpeed, ForceMode.Force);
+        _rb.velocity = _currentPlatform.transform.forward * _ballSpeed;
         isFreezeToShoot = false;
 
     }
@@ -60,17 +62,23 @@ public class Ball : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(_normal, _reflection);
+        Gizmos.DrawLine(_contactPosition, _contactPosition + _normal);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(_contactPosition, _contactPosition + _reflection);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + _rb.velocity);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collision");
         _normal = collision.contacts[0].normal;
-        _reflection = Vector3.Reflect(_rb.velocity,_normal);
+        _reflection = Vector3.Reflect(_lastFrameVelocity.normalized,_normal);
+        _contactPosition = collision.contacts[0].point;
 
-        _rb.velocity = _reflection;
+        _rb.velocity = _reflection*_ballSpeed;
 
     }
+
 
 }
