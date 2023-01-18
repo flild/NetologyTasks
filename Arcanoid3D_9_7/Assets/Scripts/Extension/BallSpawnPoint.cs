@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BallSpawnPoint : MonoBehaviour
+namespace Arcanoid
 {
+    public class BallSpawnPoint : MonoBehaviour
+    {
+    }
 }
+

@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class KillTrigger : MonoBehaviour
+namespace Arcanoid
 {
-    [SerializeField] public PlayerSide player { get; }
-
-    [SerializeField] private Platform _boundPlatform;
-
-    private void OnCollisionEnter(Collision collision)
+    public class KillTrigger : MonoBehaviour
     {
-        if( collision.gameObject.TryGetComponent<Ball>(out Ball _ball))
+        [SerializeField] public PlayerSide player { get; }
+
+        [SerializeField] private Platform _boundPlatform;
+
+        private void OnCollisionEnter(Collision collision)
         {
-            _ball.SetCurrentPlatform(_boundPlatform);
-            _ball.Death();
+            if (collision.gameObject.TryGetComponent<Ball>(out Ball _ball))
+            {
+                _ball.SetCurrentPlatform(_boundPlatform);
+                _ball.Death();
+            }
         }
     }
 }

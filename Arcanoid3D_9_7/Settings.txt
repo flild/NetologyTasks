@@ -1,0 +1,3 @@
+sound-False
+soundValue-77,50139
+difficutly-normal

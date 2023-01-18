@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class BaseControl : MonoBehaviour
+namespace Arcanoid
 {
-    private Rigidbody _rb;
-    [SerializeField]private float _moveSpeed;
-
-
-    private void Start()
+    [RequireComponent(typeof(Rigidbody))]
+    public class BaseControl : MonoBehaviour
     {
-        _rb = GetComponent<Rigidbody>();
-    }
-    public void Move(Vector2 direction)
-    {
-        Vector3 mover = direction.y * transform.up + direction.x * transform.right;
+        private Rigidbody _rb;
+        [SerializeField] private float _moveSpeed;
 
-        _rb.AddForce(mover.normalized * _moveSpeed, ForceMode.Force);
+
+        private void Start()
+        {
+            _rb = GetComponent<Rigidbody>();
+        }
+        public void Move(Vector2 direction)
+        {
+            Vector3 mover = direction.y * transform.up + direction.x * transform.right;
+
+            _rb.AddForce(mover.normalized * _moveSpeed, ForceMode.Force);
+        }
     }
 }

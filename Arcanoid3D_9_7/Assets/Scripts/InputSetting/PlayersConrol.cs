@@ -53,6 +53,15 @@ public partial class @PlayersConrol : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""063cae22-d1d8-4ccc-8db2-5b6f10bf1e99"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -176,6 +185,17 @@ public partial class @PlayersConrol : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bd8eb3a-87fd-408b-ad60-180083d185fa"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -187,6 +207,7 @@ public partial class @PlayersConrol : IInputActionCollection2, IDisposable
         m_Players_FirstPlayerMove = m_Players.FindAction("FirstPlayerMove", throwIfNotFound: true);
         m_Players_SecondPlayerMove = m_Players.FindAction("SecondPlayerMove", throwIfNotFound: true);
         m_Players_Shoot = m_Players.FindAction("Shoot", throwIfNotFound: true);
+        m_Players_Pause = m_Players.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +270,7 @@ public partial class @PlayersConrol : IInputActionCollection2, IDisposable
     private readonly InputAction m_Players_FirstPlayerMove;
     private readonly InputAction m_Players_SecondPlayerMove;
     private readonly InputAction m_Players_Shoot;
+    private readonly InputAction m_Players_Pause;
     public struct PlayersActions
     {
         private @PlayersConrol m_Wrapper;
@@ -256,6 +278,7 @@ public partial class @PlayersConrol : IInputActionCollection2, IDisposable
         public InputAction @FirstPlayerMove => m_Wrapper.m_Players_FirstPlayerMove;
         public InputAction @SecondPlayerMove => m_Wrapper.m_Players_SecondPlayerMove;
         public InputAction @Shoot => m_Wrapper.m_Players_Shoot;
+        public InputAction @Pause => m_Wrapper.m_Players_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Players; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -274,6 +297,9 @@ public partial class @PlayersConrol : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayersActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayersActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayersActionsCallbackInterface.OnShoot;
+                @Pause.started -= m_Wrapper.m_PlayersActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayersActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayersActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayersActionsCallbackInterface = instance;
             if (instance != null)
@@ -287,6 +313,9 @@ public partial class @PlayersConrol : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -296,5 +325,6 @@ public partial class @PlayersConrol : IInputActionCollection2, IDisposable
         void OnFirstPlayerMove(InputAction.CallbackContext context);
         void OnSecondPlayerMove(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

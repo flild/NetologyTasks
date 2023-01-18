@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+namespace Arcanoid
 {
-    //Заглушка
+    public class Platform : MonoBehaviour
+    {
+        //Заглушка
+    }
 }

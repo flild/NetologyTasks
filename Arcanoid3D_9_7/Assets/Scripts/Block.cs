@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+namespace Arcanoid
 {
-    private void OnCollisionEnter(Collision collision)
+    public class Block : MonoBehaviour
     {
-        if (collision.gameObject.TryGetComponent<Ball>(out Ball _ball))
+        private void OnCollisionEnter(Collision collision)
         {
-            _ball.DestroyLevelBlock(gameObject);
-        }
+            if (collision.gameObject.TryGetComponent(out Ball _ball))
+            {
+                _ball.DestroyLevelBlock(gameObject);
+            }
 
+        }
     }
 }
