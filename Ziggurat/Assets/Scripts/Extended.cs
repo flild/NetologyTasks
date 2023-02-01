@@ -25,4 +25,30 @@ namespace Ziggurat
 
 	[System.Serializable]
 	public class AnimationKeyDictionary : SerializableDictionaryBase<AnimationType, string> { }
+
+	public enum WarriorColor
+	{
+		None = 0,
+		Blue = 1,
+		Red = 2,
+		Green = 3
+    }
+    public enum AttackType
+    { 
+		slow = 0,
+		fast = 1,
+	}
+
+	public enum UnitInfoType
+	{
+		health = 0,
+		speed = 1,
+		fastAttackDamage = 2,
+		slowAttackDamage = 3,
+		missChance = 4,
+		critChance = 5,
+		slowAttackChance = 6,
+		fastAttackChance = 7
+	}
+
 }
