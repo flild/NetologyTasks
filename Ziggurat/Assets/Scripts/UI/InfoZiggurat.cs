@@ -14,6 +14,8 @@ namespace Ziggurat
 		[SerializeField] private Slider _missChance;
 		[SerializeField] private Slider _critChance;
 		[SerializeField] private Slider _AttackChance;
+        [Tooltip("цвет")]
+        [SerializeField] private WarriorColor _color;
 
 		public float GetUnitInfo(UnitInfoType type)
         {
@@ -40,6 +42,10 @@ namespace Ziggurat
             }
         }
 
+        public WarriorColor GetColor()
+        {
+            return _color;
+        }    
     }
 }
 

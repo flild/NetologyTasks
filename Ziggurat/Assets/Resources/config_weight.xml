@@ -1,13 +1,13 @@
 <?xml version="1.0"	encoding="utf-8"?>
 <Config>
-	<Attacks>
-		<Attack Name ="FastAttacks" Value="15"/>
-		<Attack Name ="SlowAttacks" Value="5"/>
-	</Attacks>
 	<Moves>
 		<Move Name="Wandering" Value="15"/>
-		<Move Name="Attack" Value="5"/>
-		<Move Name="MoveTo" Value="10"/>
+		<Move Name="Attack" Value="0"/>
+		<Move Name="MoveTo" Value="0"/>
 		<Move Name="Fear" Value="0"/>
 	</Moves>
+	<Attacks>
+		<Attack Name ="FastAttack" Value="13"/>
+		<Attack Name ="SlowAttack" Value="5"/>
+	</Attacks>
 </Config>

@@ -34,9 +34,9 @@ namespace Ziggurat
 		Green = 3
     }
     public enum AttackType
-    { 
-		slow = 0,
-		fast = 1,
+    {
+		SlowAttack = 0,
+		FastAttack = 1,
 	}
 
 	public enum UnitInfoType
@@ -49,6 +49,14 @@ namespace Ziggurat
 		critChance = 5,
 		slowAttackChance = 6,
 		fastAttackChance = 7
+	}
+
+	public enum ActionType
+	{
+		Wandering = 0,
+		Attack = 1,
+		MoveTo = 2,
+		Fear = 3
 	}
 
 }
